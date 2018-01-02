@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Making a Jquery Slider</title>
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.js"
+    integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    crossorigin="anonymous"></script>
+    <link href="https://bootswatch.com/4/slate/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <style>
+    #slider {
+        width: 940px;
+        height: 550px;
+        position: relative;
+        overflow: hidden;
+        float: left;
+        padding: 3px;
+        border: #666 solid 2px;
+        border-radius: 5px;
+    }
+    #slider img {
+        width: 940px;
+        height: 550px;
+    }
+    .slide {
+        position: absolute;
+    }
+    .slide-copy {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 20px;
+        background: #7f7f7f;
+        background: rgba(0, 0, 0, 0.4)
+
+    }
+    #prev, #next {
+        float: left;
+        margin-top: 230px;
+        cursor: pointer;
+        position: relative;
+        z-index: 100;
+    }
+    #prev {
+        left: 20px;
+    }
+    #next {
+        left: -15px;
+    }
+    </style>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="#">jQuery Slider</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+          <h1 class="text-center">Making a jQuery Slider</h1>
+        </div>
+        </div>
+     
+
+           <img src="img/arrow-left.png" alt="Prev" id="prev">
+          
+           
+             <div id="slider">
+               <div class="slide">
+                 <div class="slide-copy">
+                   <h2>Slider One</h2>
+                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras velit est, sodales a pellentesque a, mattis eu dui. Morbi dui purus, tristique sit amet purus sit amet, tristique dictum odio. Maecenas non felis eget massa laoreet facilisis sit amet nec orci. Aenean sed mi at odio tempor feugiat. </p>
+               </div>
+               <img src="img/img1.jpg">
+          </div>
+          
+
+         
+                <div class="slide">
+                  <div class="slide-copy">
+                    <h2>Slider Two</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras velit est, sodales a pellentesque a, mattis eu dui. Morbi dui purus, tristique sit amet purus sit amet, tristique dictum odio. Maecenas non felis eget massa laoreet facilisis sit amet nec orci. Aenean sed mi at odio tempor feugiat. </p>
+                </div>
+                <img src="img/img2.jpg">
+           </div>
+          
+
+           
+                <div class="slide">
+                  <div class="slide-copy">
+                    <h2>Slider Three</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras velit est, sodales a pellentesque a, mattis eu dui. Morbi dui purus, tristique sit amet purus sit amet, tristique dictum odio. Maecenas non felis eget massa laoreet facilisis sit amet nec orci. Aenean sed mi at odio tempor feugiat. </p>
+                </div>
+                <img src="img/img3.jpg">
+           </div>
+           
+
+          
+                <div class="slide">
+                  <div class="slide-copy">
+                    <h2>Slider Four</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras velit est, sodales a pellentesque a, mattis eu dui. Morbi dui purus, tristique sit amet purus sit amet, tristique dictum odio. Maecenas non felis eget massa laoreet facilisis sit amet nec orci. Aenean sed mi at odio tempor feugiat. </p>
+                </div>
+                <img src="img/img4.jpg">
+           </div>
+           
+                <div class="slide">
+                  <div class="slide-copy">
+                    <h2>Slider Five</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras velit est, sodales a pellentesque a, mattis eu dui. Morbi dui purus, tristique sit amet purus sit amet, tristique dictum odio. Maecenas non felis eget massa laoreet facilisis sit amet nec orci. Aenean sed mi at odio tempor feugiat. </p>
+                </div>
+                <img src="img/img5.jpg">
+           </div>
+
+        </div>
+     <img src="img/arrow-right.png" alt="Next" id="next">
+     
+</div>
+</body>
+
+<script>
+    $(document).ready(function(){
+        //set vars
+        var speed = 500; //speed for transitions in ms
+        var autoswitch = true;  //true/false for auto slider
+        var autoswitchspeed = 4000; //auto slider speed
+
+        //add initial active class
+        $('.slide').first().addClass('active');
+
+        //hide all slides
+        $('.slide').hide();
+
+        //show first slide
+        $('.active').show();
+
+        //click to go to the next slide
+        $('#next').on('click', nextSlide);
+
+
+        //click to go to the previous slide
+        $('#prev').on('click', prevSlide);
+
+        //auto slider
+        if(autoswitch == true){
+            setInterval(nextSlide ,autoswitchspeed);
+        }
+
+
+        //Switch to next slide
+        function nextSlide(){
+            $('.active').removeClass('active').addClass('oldActive');
+            if($('.oldActive').is(':last-child')){  //if last slide go to first
+                $('.slide').first().addClass('active');
+            } else { //not last slide, just go to the next slide
+                $('.oldActive').next().addClass('active');
+            }
+            $('.oldActive').removeClass('oldActive');
+            $('.slide').fadeOut(speed);  //fade out at speed set above
+            $('.active').fadeIn(speed);  //fade in at speed set above
+        }
+
+        //switch to previous slide
+        function prevSlide(){
+            $('.active').removeClass('active').addClass('oldActive');
+            if($('.oldActive').is(':first-child')){  //if first slide go to last
+                $('.slide').last().addClass('active');
+            } else { //not last slide, just go to the next slide
+                $('.oldActive').prev().addClass('active');
+            }
+            $('.oldActive').removeClass('oldActive');
+            $('.slide').fadeOut(speed);  //fade out at speed set above
+            $('.active').fadeIn(speed);  //fade in at speed set above       
+        }
+    });
+
+</script>
+</html>
